@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+long long factorial_iterative(int n) {
+    long long fact = 1;
+    for(int i = 1; i <= n; i++) {
+        fact *= i;
+    }
+    return fact;
+}
+
+long long factorial_recursive(int n) {
+    if(n == 0 || n == 1)
+        return 1;
+    return n * factorial_recursive(n - 1);
+}
+
+int main() {
+    int choice, num;
+
+    do {
+        printf("\n--- FACTORIAL MENU ---\n");
+        printf("1. Iterative Method\n");
+        printf("2. Recursive Method\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        if(choice == 1 || choice == 2) {
+            printf("Enter a number (0 to 20): ");
+            scanf("%d", &num);
+
+            // Edge cases handling
+            if(num < 0) {
+                printf("Invalid input! Factorial not defined for negative numbers.\n");
+                continue;
+            }
+            if(num > 20) {
+                printf("Number too large! May cause overflow.\n");
+                continue;
+            }
+
+            if(choice == 1)
+                printf("Factorial = %lld\n", factorial_iterative(num));
+            else
+                printf("Factorial = %lld\n", factorial_recursive(num));
+        }
+        else if(choice == 3) {
+            printf("Exiting program...\n");
+        }
+        else {
+            printf("Invalid choice\n");
+        }
+
+    } while(choice != 3);
+
+    return 0;
+}
